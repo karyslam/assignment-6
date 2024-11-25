@@ -1,0 +1,26 @@
+[
+    {
+      "id": 1,
+      "name": "Pink Champagne",
+      "price": 60,
+      "image": "/pinkchampagne.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Red Dynasty",
+      "price": 40,
+      "image": "/reddynasty.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Rose Garden",
+      "price": 40,
+      "image": "/rosebouquet.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Love and Clouds",
+      "price": 55,
+      "image": "/loveandclouds.jpg"
+    }
+  ]

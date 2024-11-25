@@ -1,0 +1,37 @@
+[
+    {
+      "id": 1,
+      "name": "Pink and Lilac",
+      "price": 70,
+      "image": "/pinkandlilac.jpg",
+      "description": "Pink and lilac roses."
+    },
+    {
+      "id": 2,
+      "name": "Sunshine",
+      "price": 55,
+      "image": "/sunshine.jpg",
+      "description": "Roses and peach coloured flowers."
+    },
+    {
+      "id": 3,
+      "name": "Sweetie",
+      "price": 45,
+      "image": "/sweetie.jpg",
+      "description": "Bouquet of pink flowers."
+    },
+    {
+      "id": 4,
+      "name": "Tulips",
+      "price": 30,
+      "image": "/tulips.jpg",
+      "description": "Seasonal tulip flowers."
+    },
+    {
+      "id": 5,
+      "name": "Autumn",
+      "price": 45,
+      "image": "/autumn.jpg",
+      "description": "The perfect bouquet for fall."
+    }
+  ]

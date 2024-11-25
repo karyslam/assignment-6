@@ -58,7 +58,7 @@ export const useCart = () => {
         console.log(cart)
         console.log("Remove from Cart: ", product_id)
         setCart((currentCart) => {
-            return currentCart.filter(item => item.product_id !== product_id);
+            return currentCart.filter(product => product.product_id !== product_id);
         });
         console.log(cart)
     }

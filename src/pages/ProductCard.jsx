@@ -12,44 +12,37 @@ const ProductCard = (props) => {
     const handleAddToCart = () => {
         addToCart(props);
         showMessage('Item added to cart', 'success');
-        setLocation('/cart');
+        // setLocation('/cart');
     }
 
     return (
-        // <div className="card">
-        //   <img
-        //     src={props.imageUrl}
-        //     className="card-img-top"
-        //     alt={props.productName}
-        //   />
-        //   <div className="card-body">
-        //     <h5 className="card-title">{props.productName}</h5>
-        //     <p className="card-text">${props.price}</p>
-        //     <button className="btn btn-primary" onClick={handleAddToCart}>
-        //       Add to Cart
-        //     </button>
-        //   </div>
-        // </div>
-        <div key={props.productName} className="group relative">
-            <img
-                alt={props.productName}
-                src={props.imageUrl}
-                className="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80"
-            />
-            <div className="mt-4 flex justify-between">
-                <div>
-                    <h3 className="text-sm text-gray-700">
-                        {/* <a href={product.href}> */}
-                        <span aria-hidden="true" className="absolute inset-0" />
-                        {props.productName}
-                        {/* </a> */}
-                    </h3>
-                    {/* <p className="mt-1 text-sm text-gray-500">{product.color}</p> */}
-                </div>
-                <p className="text-sm font-medium text-gray-900">{props.price}</p>
-            </div>
-        </div>
+        <>
+            <div key={props.productName} className="group relative">
+                <img
+                    alt={props.productName}
+                    src={props.imageUrl}
+                    className="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80"
+                />
+                <div className="mt-4 flex justify-between">
+                    <div>
+                        <h3 className="text-sm text-gray-700">
+                            {/* <a href={product.href}> */}
+                            <span aria-hidden="true" className="absolute inset-0" />
+                            {props.productName}
+                            {/* </a> */}
+                        </h3>
+                        {/* <p className="mt-1 text-sm text-gray-500">{product.color}</p> */}
+                    </div>
+                    <p className="text-sm font-medium text-gray-900">{props.price}</p>
 
+                </div>
+            </div>
+            <div className="mt-2">
+                <button className="rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" onClick={handleAddToCart}>
+                    Add to Cart
+                </button>
+            </div>
+        </>
     );
 };
 

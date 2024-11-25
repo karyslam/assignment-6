@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Route, Switch } from 'wouter';
 import { useFlashMessage } from './components/FlashMessageStore';
 import Navbar from './components/navbar';
-import ShoppingCart from './components/ShoppingCart';
+import ShoppingCart from './pages/ShoppingCart';
 import AboutUsPage from './pages/aboutus';
 import CategoriesPage from './pages/categories';
 import HomePage from './pages/home';
@@ -47,6 +47,7 @@ function App() {
           <Route path="/products" component={ProductsPage} />
           <Route path="/products/:id" component={SingleProductPage} />
           <Route path="/register" component={RegisterPage} />
+          <Route path="/shopping-cart" component={ShoppingCart} />
         </Switch>
       </body>
       <footer className="bg-dark text-white text-center py-3">
@@ -54,7 +55,7 @@ function App() {
           <p>&copy; 2023 E-Shop. All rights reserved.</p>
         </div>
       </footer>
-      <ShoppingCart />
+      {/* <ShoppingCart /> */}
     </div>
   );
 }

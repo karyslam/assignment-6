@@ -1,6 +1,6 @@
 /*
   This example requires some changes to your config:
-  
+
   ```
   // tailwind.config.js
   module.exports = {
@@ -15,32 +15,40 @@
 const products = [
   {
     id: 1,
-    name: 'Basic Tee 8-Pack',
-    href: '#',
-    price: '$256',
-    description: 'Get the full lineup of our Basic Tees. Have a fresh shirt all week, and an extra for laundry day.',
-    options: '8 colors',
-    imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/category-page-02-image-card-01.jpg',
-    imageAlt: 'Eight shirts arranged on table in black, olive, grey, blue, white, red, mustard, and green.',
+    name: "Basic Tee 8-Pack",
+    href: "#",
+    price: "$256",
+    description:
+      "Get the full lineup of our Basic Tees. Have a fresh shirt all week, and an extra for laundry day.",
+    options: "8 colors",
+    imageSrc:
+      "https://tailwindui.com/plus/img/ecommerce-images/category-page-02-image-card-01.jpg",
+    imageAlt:
+      "Eight shirts arranged on table in black, olive, grey, blue, white, red, mustard, and green.",
   },
   {
     id: 2,
-    name: 'Basic Tee',
-    href: '#',
-    price: '$32',
-    description: 'Look like a visionary CEO and wear the same black t-shirt every day.',
-    options: 'Black',
-    imageSrc: 'https://tailwindui.com/plus/img/ecommerce-images/category-page-02-image-card-02.jpg',
-    imageAlt: 'Front of plain black t-shirt.',
+    name: "Basic Tee",
+    href: "#",
+    price: "$32",
+    description:
+      "Look like a visionary CEO and wear the same black t-shirt every day.",
+    options: "Black",
+    imageSrc:
+      "https://tailwindui.com/plus/img/ecommerce-images/category-page-02-image-card-02.jpg",
+    imageAlt: "Front of plain black t-shirt.",
   },
   // More products...
-]
+];
 
 export default function SingleCategoryPage() {
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-        <section aria-labelledby="featured-heading" className="relative mb-16 overflow-hidden rounded-lg lg:h-96">
+        <section
+          aria-labelledby="featured-heading"
+          className="relative mb-16 overflow-hidden rounded-lg lg:h-96"
+        >
           <div className="absolute inset-0">
             <img
               alt=""
@@ -52,11 +60,15 @@ export default function SingleCategoryPage() {
           <div aria-hidden="true" className="relative h-32 w-full lg:hidden" />
           <div className="absolute inset-x-0 bottom-0 rounded-bl-lg rounded-br-lg bg-black bg-opacity-75 p-6 backdrop-blur backdrop-filter sm:flex sm:items-center sm:justify-between lg:inset-x-auto lg:inset-y-0 lg:w-96 lg:flex-col lg:items-start lg:rounded-br-none lg:rounded-tl-lg">
             <div>
-              <h2 id="featured-heading" className="text-xl font-bold text-white">
+              <h2
+                id="featured-heading"
+                className="text-xl font-bold text-white"
+              >
                 Appreciation
               </h2>
               <p className="mt-1 text-sm text-gray-300">
-                Say thank you from the heart—let flowers express your appreciation in the most beautiful way.
+                Say thank you from the heart—let flowers express your
+                appreciation in the most beautiful way.
               </p>
             </div>
           </div>
@@ -84,8 +96,12 @@ export default function SingleCategoryPage() {
                 </h3>
                 <p className="text-sm text-gray-500">{product.description}</p>
                 <div className="flex flex-1 flex-col justify-end">
-                  <p className="text-sm italic text-gray-500">{product.options}</p>
-                  <p className="text-base font-medium text-gray-900">{product.price}</p>
+                  <p className="text-sm italic text-gray-500">
+                    {product.options}
+                  </p>
+                  <p className="text-base font-medium text-gray-900">
+                    {product.price}
+                  </p>
                 </div>
               </div>
             </div>
@@ -93,6 +109,5 @@ export default function SingleCategoryPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
-

@@ -1,195 +1,124 @@
-import axios from 'axios';
-import { Field, Form, Formik } from 'formik';
-import React, { useState } from 'react';
-import { useLocation } from 'wouter';
-import * as Yup from 'yup';
-import { useFlashMessage } from './FlashMessageStore';
+import axios from "axios";
+import { Field, Form, Formik } from "formik";
+import React from "react";
+import { useLocation } from "wouter";
+import * as Yup from "yup";
+import { useFlashMessage } from "../stores/FlashMessageStore";
 
 function RegisterPage() {
-    const initialValues = {
-        name: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-        salutation: '',
-        marketingPreferences: [],
-        country: ''
-    };
+  const initialValues = {
+    name: "",
+    email: "",
+    confirmPassword: "",
+  };
 
-    const { showMessage } = useFlashMessage();
+  const { showMessage } = useFlashMessage();
+  const [, setLocation] = useLocation();
 
-    const [, setLocation] = useLocation();
-    const [showSuccess, setShowSuccess] = useState(false);
+  const handleSubmit = async (values, formikHelpers) => {
+    console.log("hello")
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/api/users/register`,
+        values
+      );
+      console.log("Registration successful:", response.data);
+      showMessage("Registration successful!", "success");
+    } catch (error) {
+      console.error(
+        "Registration failed:",
+        error.response?.data || error.message
+      );
+      showMessage("Registration failed. Please try again.", "error");
+    } finally {
+      formikHelpers.setSubmitting(false);
+      setLocation("/");
+    }
+  };
 
-    const handleSubmit = async (values, formikHelpers) => {
-        try {
-            const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/register`, values);
-            console.log('Registration successful:', response.data);
-            setLocation("/");
+  const validationSchema = Yup.object({
+    name: Yup.string().required("Name is required"),
+    email: Yup.string()
+      .email("Invalid email address")
+      .required("Email is required"),
+    password: Yup.string()
+      .min(8, "Password must be at least 8 characters")
+      .required("Password is required"),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref("password"), null], "Passwords must match")
+      .required("Confirm Password is required"),
+  });
 
-        } catch (error) {
-            console.error('Registration failed:', error.response?.data || error.message);
-            // Handle registration error (e.g., show error message)
-        } finally {
-            formikHelpers.setSubmitting(false);
-        }
-    };
+  return (
+    <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 mt-5">
+      <h1>Register</h1>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        {(formik) => (
+          <Form>
+            <div className="mb-3">
+              <label htmlFor="name" className="form-label">
+                Name
+              </label>
+              <Field
+                type="text"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                id="name"
+                name="name"
+              />
+            </div>
 
-    const validationSchema = Yup.object({
-        name: Yup.string().required('Name is required'),
-        email: Yup.string().email('Invalid email address').required('Email is required'),
-        password: Yup.string().min(8, 'Password must be at least 8 characters').required('Password is required'),
-        confirmPassword: Yup.string()
-            .oneOf([Yup.ref('password'), null], 'Passwords must match')
-            .required('Confirm Password is required'),
-        salutation: Yup.string().required('Salutation is required'),
-        country: Yup.string().required('Country is required'),
-    });
+            <div className="mb-3">
+              <label htmlFor="email" className="form-label">
+                Email
+              </label>
+              <Field
+                type="email"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                id="email"
+                name="email"
+              />
+            </div>
 
+            <div className="mb-3">
+              <label htmlFor="password" className="form-label">
+                Password
+              </label>
+              <Field
+                type="password"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                id="password"
+                name="password"
+              />
+            </div>
 
+            <div className="mb-3">
+              <label htmlFor="confirmPassword" className="form-label">
+                Confirm Password
+              </label>
+              <Field
+                type="password"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
+                id="confirmPassword"
+                name="confirmPassword"
+              />
+            </div>
 
-    return (
-        <div className="container mt-5">
-            <h1>Register</h1>
-            <Formik
-                initialValues={initialValues}
-                validationSchema={validationSchema}
-                onSubmit={handleSubmit}
+            <button
+              type="submit"
+              className="rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              disabled={formik.isSubmitting}
             >
-                {(formik) => (
-                    <Form>
-                        <div className="mb-3">
-                            <label htmlFor="name" className="form-label">Name</label>
-                            <Field
-                                type="text"
-                                className="form-control"
-                                id="name"
-                                name="name"
-                            />
-                        </div>
-
-                        <div className="mb-3">
-                            <label htmlFor="email" className="form-label">Email</label>
-                            <Field
-                                type="email"
-                                className="form-control"
-                                id="email"
-                                name="email"
-                            />
-                        </div>
-
-                        <div className="mb-3">
-                            <label htmlFor="password" className="form-label">Password</label>
-                            <Field
-                                type="password"
-                                className="form-control"
-                                id="password"
-                                name="password"
-                            />
-                        </div>
-
-                        <div className="mb-3">
-                            <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
-                            <Field
-                                type="password"
-                                className="form-control"
-                                id="confirmPassword"
-                                name="confirmPassword"
-                            />
-                        </div>
-
-                        <div className="mb-3">
-                            <label className="form-label">Salutation</label>
-                            <div>
-                                <div className="form-check form-check-inline">
-                                    <Field
-                                        className="form-check-input"
-                                        type="radio"
-                                        name="salutation"
-                                        id="mr"
-                                        value="Mr"
-                                    />
-                                    <label className="form-check-label" htmlFor="mr">Mr</label>
-                                </div>
-                                <div className="form-check form-check-inline">
-                                    <Field
-                                        className="form-check-input"
-                                        type="radio"
-                                        name="salutation"
-                                        id="ms"
-                                        value="Ms"
-                                    />
-                                    <label className="form-check-label" htmlFor="ms">Ms</label>
-                                </div>
-                                <div className="form-check form-check-inline">
-                                    <Field
-                                        className="form-check-input"
-                                        type="radio"
-                                        name="salutation"
-                                        id="mrs"
-                                        value="Mrs"
-                                    />
-                                    <label className="form-check-label" htmlFor="mrs">Mrs</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="mb-3">
-                            <label className="form-label">Marketing Preferences</label>
-                            <div className="form-check">
-                                <Field
-                                    className="form-check-input"
-                                    type="checkbox"
-                                    id="emailMarketing"
-                                    name="marketingPreferences"
-                                    value="email"
-                                />
-                                <label className="form-check-label" htmlFor="emailMarketing">
-                                    Email Marketing
-                                </label>
-                            </div>
-                            <div className="form-check">
-                                <Field
-                                    className="form-check-input"
-                                    type="checkbox"
-                                    id="smsMarketing"
-                                    name="marketingPreferences"
-                                    value="sms"
-                                />
-                                <label className="form-check-label" htmlFor="smsMarketing">
-                                    SMS Marketing
-                                </label>
-                            </div>
-                        </div>
-
-                        <div className="mb-3">
-                            <label htmlFor="country" className="form-label">Country</label>
-                            <Field
-                                as="select"
-                                className="form-select"
-                                id="country"
-                                name="country"
-                            >
-                                <option value="">Select Country</option>
-                                <option value="sg">Singapore</option>
-                                <option value="my">Malaysia</option>
-                                <option value="in">Indonesia</option>
-                                <option value="th">Thailand</option>
-                            </Field>
-                        </div>
-
-                        <button
-                            type="submit"
-                            className="btn btn-primary"
-                            disabled={formik.isSubmitting}
-                        >
-                            Register
-                        </button>
-                    </Form>
-                )}
-            </Formik>
-        </div>
-    );
+              Register
+            </button>
+          </Form>
+        )}
+      </Formik>
+    </div>
+  );
 }
 
 export default RegisterPage;

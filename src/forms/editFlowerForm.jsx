@@ -1,5 +1,3 @@
 export default function EditFlowerForm() {
-    return (
-        <p>Edit Flower Form</p>
-    )
+  return <p>Edit Flower Form</p>;
 }
